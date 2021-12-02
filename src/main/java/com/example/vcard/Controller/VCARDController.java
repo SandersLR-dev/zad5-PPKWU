@@ -16,7 +16,20 @@ public class VCARDController {
         return siteGetter.getPanoramaFirm(text);
     }
 
+    @GetMapping(value = "/vcard/", produces = {"text/vcard"})
+    public String getVCard(@RequestParam String name,
+                           @RequestParam String telephone,
+                           @RequestParam String email,
+                           @RequestParam String website,
+                           @RequestParam String street,
+                           @RequestParam String postalCode,
+                           @RequestParam String city){
 
+        SiteGetter siteGetter = new SiteGetter();
+
+        return siteGetter.createVCard(name,email,website,telephone,street,postalCode,city);
+
+    }
 
 
 

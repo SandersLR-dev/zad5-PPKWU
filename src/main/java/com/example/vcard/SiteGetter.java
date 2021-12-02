@@ -136,5 +136,39 @@ public class SiteGetter {
         return html;
     }
 
+    public String createVCard(String name,String email,String site,String tel,String ulica,String code,String city){
+        VCard vCard = new VCard();
+
+        Address adres = new Address();
+        adres.setPostalCode(code);
+        adres.setStreetAddress(ulica);
+        adres.setRegion(city);
+
+        vCard.setFormattedName(name);
+        vCard.addTelephoneNumber(tel);
+        vCard.addEmail(email);
+        vCard.addUrl(site);
+        vCard.addAddress(adres);
+
+
+        return Ezvcard.write(vCard).version(VCardVersion.V4_0).go();
+    }
+
+    public static String getVcard(String name, String telephone, String email, String website, String street, String postalCode, String city) {
+        VCard vcard = new VCard();
+
+        Address address = new Address();
+        address.setPostalCode(postalCode);
+        address.setStreetAddress(street);
+        address.setRegion(city);
+
+        vcard.setFormattedName(name);
+        vcard.addTelephoneNumber(telephone);
+        vcard.addEmail(email);
+        vcard.addUrl(website);
+        vcard.addAddress(address);
+
+        return Ezvcard.write(vcard).version(VCardVersion.V4_0).go();
+    }
 
 }
